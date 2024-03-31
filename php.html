@@ -1,0 +1,29 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Retrieve form data
+    $name = $_POST['name'];
+    $phoneNumber = $_POST['phone'];
+    $email = $_POST['email'];
+    $location = $_POST['location'];
+    $caseType = $_POST['case_type'];
+    $message = $_POST['message'];
+
+    // Set up email parameters
+    $to = 'natuchrista40@gmail.com'; // Replace with your email address
+    $subject = 'New form submission';
+    $body = "Name: $name\nPhone Number: $phoneNumber\nEmail: $email\nLocation: $location\nCase Type: $caseType\nMessage: $message";
+
+    // Send email
+    $headers = "From: $email";
+    if (mail($to, $subject, $body, $headers)) {
+        // Email sent successfully
+        echo 'Thank you for your submission!';
+    } else {
+        // Error sending email
+        echo 'An error occurred while sending the email.';
+    }
+} else {
+    // Handle non-POST requests if needed
+    echo 'Invalid request.';
+}
+?>
